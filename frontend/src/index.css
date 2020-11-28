@@ -1,0 +1,46 @@
+/* begin top header */
+#topHeader{
+  border-bottom: 1px solid #ebebeb;
+}
+
+#topHeader a{
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 0.89rem;
+  text-decoration: none;
+}
+/* end to header */
+
+
+main {
+    min-height: 70vh;
+}
+
+
+/* start footer */
+.full-footer{
+  background-color: #243c4f;
+}
+.top-footer p{
+  color: white;
+}
+.top-footer a{
+  color: white;
+  font-weight: 600;
+}
+.top-footer h3{
+  color: white;
+}
+
+.bottom-footer{
+  background-color: #19232e;
+}
+.bottom-footer p{
+ color: white;
+}
+/* end footer */
+
+/* override background color of navbar */
+.bg-dark{
+    background-color: #004d80 !important;
+}
