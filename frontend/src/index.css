@@ -45,6 +45,11 @@ main {
     background-color: #004d80 !important;
 }
 
+/* override background color of btn-dark */
+.btn-dark{
+    background-color: #004d80 !important;
+}
+
 h3{
   padding: 1rem 0;
 }
