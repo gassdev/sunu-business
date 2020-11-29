@@ -44,3 +44,12 @@ main {
 .bg-dark{
     background-color: #004d80 !important;
 }
+
+h3{
+  padding: 1rem 0;
+}
+
+/* rating */
+.rating span {
+  margin: 0.1rem;
+}

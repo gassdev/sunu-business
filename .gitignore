@@ -27,3 +27,6 @@ node_modules/
 .eslintcache
 pnpm-lock.yaml
 .env
+
+images/
+products.js
