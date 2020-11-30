@@ -1,13 +1,20 @@
 import React from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Container, Nav, Navbar, Row } from 'react-bootstrap'
+import { useRouteMatch } from 'react-router-dom'
 
 const Header = () => {
+    const match = useRouteMatch()
+
+    const isActive = (path) => {
+        return match.path === path
+    }
     return (
         <header>
             <div className="p-1" id="topHeader">
                 <Container>
                     <Row>
+                        { }
                         <div className="col-12 text-right">
                             <a className="p-1" href="tel:+22133987654321"> <i className="fas fa-phone"></i> +(221) 33987654321 </a>
                             <a className="p-1" href="mailto:contact@sunubusiness.com"> <i className="fas fa-envelope"></i> contact@sunubusiness.com </a>
@@ -25,10 +32,10 @@ const Header = () => {
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="ml-auto">
                                 <LinkContainer to="/cart">
-                                    <Nav.Link><i className="fas fa-shopping-cart"></i> Panier</Nav.Link>
+                                    <Nav.Link active={isActive('/cart')}><i className="fas fa-shopping-cart"></i> Panier</Nav.Link>
                                 </LinkContainer>
                                 <LinkContainer to="/login">
-                                    <Nav.Link><i className="fas fa-user"></i> Se Connecter</Nav.Link>
+                                    <Nav.Link active={isActive('/login')}><i className="fas fa-user"></i> Se Connecter</Nav.Link>
                                 </LinkContainer>
                             </Nav>
                         </Navbar.Collapse>

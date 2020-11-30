@@ -8,10 +8,10 @@ const Footer = () => {
                 <Row>
                     <Col md={3} className="pl-4 pr-4">
                         <p>SUNU-BUSINESS</p>
-                        <a style={{ "color": "silver" }} className="p-1" href="#"><i className="fab fa-2x fa-facebook-square"></i></a>
-                        <a style={{ "color": "silver" }} className="p-1" href="#"><i className="fab fa-2x fa-google-plus-square"></i></a>
-                        <a style={{ "color": "silver" }} className="p-1" href="#"><i className="fab fa-2x fa-twitter-square"></i></a>
-                        <a style={{ "color": "silver" }} className="p-1" href="#"><i className="fab fa-2x fa-instagram"></i></a>
+                        <a style={{ "color": "silver" }} className="p-1" href="/#"><i className="fab fa-2x fa-facebook-square"></i></a>
+                        <a style={{ "color": "silver" }} className="p-1" href="/#"><i className="fab fa-2x fa-google-plus-square"></i></a>
+                        <a style={{ "color": "silver" }} className="p-1" href="/#"><i className="fab fa-2x fa-twitter-square"></i></a>
+                        <a style={{ "color": "silver" }} className="p-1" href="/#"><i className="fab fa-2x fa-instagram"></i></a>
                     </Col>
                 </Row>
             </Container>
