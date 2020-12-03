@@ -1,18 +1,18 @@
 import express from 'express'
 const router = express.Router()
 import {
-    getProducts,
-    getProductById
-} from '../controllers/productController.js'
+    getCategories,
+    getCategoryById
+} from '../controllers/categoryController.js'
 
 
 router
     .route('/')
-    .get(getProducts)
+    .get(getCategories)
 
 
 router
     .route('/:id')
-    .get(getProductById)
+    .get(getCategoryById)
 
 export default router
