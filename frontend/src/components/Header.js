@@ -1,7 +1,9 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Container, Nav, Navbar, Row } from 'react-bootstrap'
+import { Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap'
 import { useRouteMatch } from 'react-router-dom'
+import { logout } from '../actions/userActions'
 
 const Header = () => {
     const match = useRouteMatch()
@@ -9,6 +11,16 @@ const Header = () => {
     const isActive = (path) => {
         return match.path === path
     }
+
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
+
     return (
         <header>
             <div className="p-1" id="topHeader">
@@ -34,9 +46,21 @@ const Header = () => {
                                 <LinkContainer to="/cart">
                                     <Nav.Link active={isActive('/cart')}><i className="fas fa-shopping-cart"></i> Panier</Nav.Link>
                                 </LinkContainer>
-                                <LinkContainer to="/login">
-                                    <Nav.Link active={isActive('/login')}><i className="fas fa-user"></i> Se Connecter</Nav.Link>
-                                </LinkContainer>
+                                {userInfo ? (
+                                    <NavDropdown title={userInfo.firstName + " " + userInfo.lastName} id='username'>
+                                        <LinkContainer to="/profile">
+                                            <NavDropdown.Item>Profil</NavDropdown.Item>
+                                        </LinkContainer>
+                                        <NavDropdown.Item onClick={logoutHandler}>Se déconnecter</NavDropdown.Item>
+                                    </NavDropdown>
+                                ) : (<>
+                                    <LinkContainer to="/login">
+                                        <Nav.Link active={isActive('/login')}><i className="fas fa-user"></i> Connectez-vous</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to='/register'>
+                                        <Nav.Link active={isActive('/register')}><i className="fas fa-user-plus"></i> Créez un compte</Nav.Link>
+                                    </LinkContainer>
+                                </>)}
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
