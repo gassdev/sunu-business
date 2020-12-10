@@ -50,6 +50,16 @@ main {
     background-color: #004d80 !important;
 }
 
+.btn-outline-dark{
+  color: #004d80 !important;
+  border-color: #004d80 !important;
+}
+
+.btn-outline-dark:hover{
+  color: #fff !important;
+  background-color: #004d80 !important;
+}
+
 h3{
   padding: 1rem 0;
 }

@@ -49,10 +49,11 @@ const registerUser = asyncHandler(async (req, res) => {
         const sent = await transporter.sendMail(emailData)
 
         if (sent) {
-            console.log('SIGNUP EMAIL SENT ', sent)
-            return res.json({
-                message: `Un message de confirmation a été envoyé à ${email}. Suivez les instructions pour activer votre compte`
-            })
+            // console.log('SIGNUP EMAIL SENT ', sent)
+            // return res.json({
+            //     message: `Un e-mail de confirmation vous a été envoyé.`
+            // })
+            return res.send('Un e-mail de confirmation vous a été envoyé')
         }
     }
 
@@ -68,7 +69,7 @@ const activateAccount = asyncHandler(async (req, res) => {
 
     if (token) {
         const decoded = jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION)
-        console.log(decoded)
+        // console.log(decoded)
         if (decoded) {
             const { firstName, lastName, email, password } = jwt.decode(token)
 

@@ -18,9 +18,10 @@ const HomePage = () => {
     }, [dispatch])
 
 
-
     return (
         <>
+            {sessionStorage.getItem('successMsg') && <Message variant="success">{sessionStorage.getItem('successMsg')}</Message>}
+            {sessionStorage.removeItem('successMsg')}
             <h1>Derniers arrivages</h1>
             {loading ?
                 <Loader /> :
