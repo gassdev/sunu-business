@@ -23,6 +23,10 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    resetPasswordLink: {
+        data: String,
+        default: ''
     }
 }, {
     timestamps: true

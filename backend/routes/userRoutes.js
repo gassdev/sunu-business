@@ -3,11 +3,13 @@ const router = express.Router()
 import {
     activateAccount,
     authUser,
+    forgotPassword,
     getUserProfile,
     registerUser,
+    resetPassword,
 } from '../controllers/userController.js'
 import { protect } from '../middlewares/authMiddleware.js'
-import { userRegisterValidator } from '../validators/userValidator.js'
+import { forgotPasswordValidator, resetPasswordValidator, userRegisterValidator } from '../validators/userValidator.js'
 import { runValidation } from '../validators/index.js'
 
 router
@@ -21,5 +23,9 @@ router.post('/login', authUser)
 router
     .route('/profile')
     .get(protect, getUserProfile)
+
+router.put('/forgot-password', forgotPasswordValidator, runValidation, forgotPassword)
+router.put('/reset-password', resetPasswordValidator, runValidation, resetPassword)
+
 
 export default router

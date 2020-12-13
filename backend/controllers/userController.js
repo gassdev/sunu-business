@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
+import _ from 'lodash'
 import smtpTransport from 'nodemailer-smtp-transport'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
@@ -157,9 +158,123 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 })
 
+
+
+const forgotPassword = (req, res) => {
+    const { email } = req.body
+
+    User.findOne({ email }, (err, user) => {
+        if (err || !user) {
+            return res.status(400).json({
+                error: "L'utilisateur avec cet e-mail n'existe pas"
+            })
+        }
+
+        const transporter = nodemailer.createTransport(smtpTransport({
+            host: 'smtp.mailtrap.io',
+            port: 2525,
+            auth: {
+                user: process.env.USER_EMAIL,
+                pass: process.env.USER_PASS
+            }
+        }))
+
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_RESET_PASSWORD, { expiresIn: '10m' })
+
+        const emailData = {
+            from: `Application <${process.env.EMAIL_FROM}>`,
+            to: email,
+            subject: `Réinitialisation de mot de passe`,
+            html: `
+            <h1>Réinitialiser votre mot de passe</h1>
+            <p>Veuillez cliquer le lien suivant pour réinitialiser votre mot de passe</p>
+            <p>${process.env.CLIENT_URL}/auth/password/reset/${token}</p>
+            <hr/>
+            <small>Cet email peut contenir des informations sensibles, veuillez ne pas le partager</p>
+            <br/>
+            <small>${process.env.CLIENT_URL}</small> 
+            `
+        }
+
+        return user.updateOne({ resetPasswordLink: token }, (err, success) => {
+            if (err) {
+                console.log('RESET PASSWORD LINK ERROR', err)
+                return res.status(400).json({
+                    error: 'Database connection error on user password forgot request'
+                })
+            } else {
+                // sending the email.
+                transporter.sendMail(emailData)
+                    .then(sent => {
+                        // console.log('SIGNUP EMAIL SENT ', sent)
+                        return res.json({
+                            message: `Un e-mail vous a été envoyé. Suivez les instructions pour réinitialiser votre mot de passe`
+                        })
+                    })
+                    .catch(err => {
+                        // console.log('SIGNUP EMAIL SENT ERROR ', err)
+                        return res.json({
+                            message: err.message
+                        })
+                    })
+            }
+        })
+
+
+
+    })
+
+
+}
+
+
+
+const resetPassword = (req, res) => {
+    const { resetPasswordLink, newPassword } = req.body
+
+    if (resetPasswordLink) {
+        jwt.verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD, function (err, decoded) {
+            if (err) {
+                return res.status(400).json({
+                    error: 'Lien expiré: Veuillez réessayer'
+                })
+            }
+
+            User.findOne({ resetPasswordLink }, (err, user) => {
+                if (err || !user) {
+                    return res.status(400).json({
+                        error: 'Something went wrong. Try later'
+                    })
+                }
+
+                const updatedFields = {
+                    password: newPassword,
+                    resetPasswordLink: ''
+                }
+
+                user = _.extend(user, updatedFields)
+
+                user.save((err, result) => {
+                    if (err) {
+                        return res.status(400).json({
+                            error: 'Error resetting user password'
+                        })
+                    }
+                    res.json({
+                        message: `Génial! Vous pouvez maintenant vous connecter avec votre nouveau mot de passe`
+                    })
+                })
+            })
+        })
+    }
+}
+
+
 export {
     authUser,
     getUserProfile,
     registerUser,
     activateAccount,
+    forgotPassword,
+    resetPassword,
 }

@@ -19,3 +19,17 @@ export const userRegisterValidator = [
         .isLength({ min: 6 })
         .withMessage('Votre mot de passe doit avoir au moins 6 caractères')
 ]
+
+export const forgotPasswordValidator = [
+    check('email')
+        .isEmail()
+        .withMessage('Veuillez entrer une adresse e-mail valide')
+]
+
+export const resetPasswordValidator = [
+    check('newPassword')
+        .not()
+        .isEmpty()
+        .isLength({ min: 6 })
+        .withMessage('Votre mot de passe doit avoir au moins 6 caractères')
+]
