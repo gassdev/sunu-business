@@ -160,6 +160,43 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 
 
+// @desc Update user profile
+// @route PUT /api/users/profile
+// @access Private
+const updateUserProfile = asyncHandler(async (req, res) => {
+
+    const user = await User.findById(req.user._id)
+
+    if (user) {
+        user.firstName = req.body.firstName || user.firstName
+        user.lastName = req.body.lastName || user.lastName
+        if (req.body.password) {
+            user.password = req.body.password
+        }
+
+        const updatedUser = await user.save()
+
+        res.json({
+            _id: updatedUser._id,
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            email: updatedUser.email,
+            isAdmin: updateUserProfile.isAdmin,
+            token: generateToken(updatedUser._id)
+        })
+
+    } else {
+        res.status(404)
+        throw new Error('Utilisateur non trouvé.')
+    }
+
+
+})
+
+
+// @desc Forgot user password
+// @route PUT /api/users/forgot-password
+// @access Public
 const forgotPassword = (req, res) => {
     const { email } = req.body
 
@@ -228,7 +265,9 @@ const forgotPassword = (req, res) => {
 }
 
 
-
+// @desc Reset user password
+// @route PUT /api/users/reset-password
+// @access Public
 const resetPassword = (req, res) => {
     const { resetPasswordLink, newPassword } = req.body
 
@@ -277,4 +316,5 @@ export {
     activateAccount,
     forgotPassword,
     resetPassword,
+    updateUserProfile,
 }

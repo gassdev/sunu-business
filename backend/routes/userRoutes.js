@@ -7,6 +7,7 @@ import {
     getUserProfile,
     registerUser,
     resetPassword,
+    updateUserProfile,
 } from '../controllers/userController.js'
 import { protect } from '../middlewares/authMiddleware.js'
 import { forgotPasswordValidator, resetPasswordValidator, userRegisterValidator } from '../validators/userValidator.js'
@@ -23,6 +24,7 @@ router.post('/login', authUser)
 router
     .route('/profile')
     .get(protect, getUserProfile)
+    .put(protect, updateUserProfile)
 
 router.put('/forgot-password', forgotPasswordValidator, runValidation, forgotPassword)
 router.put('/reset-password', resetPasswordValidator, runValidation, resetPassword)

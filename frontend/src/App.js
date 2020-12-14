@@ -11,6 +11,7 @@ import RegisterPage from './pages/RegisterPage';
 import ActivatePage from './pages/ActivatePage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import ProfilePage from './pages/ProfilePage';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Container>
           <Route path='/login' component={LoginPage} />
           <Route path='/register' component={RegisterPage} />
+          <Route path='/profile' component={ProfilePage} />
           <Route path='/auth/activate/:token' component={ActivatePage} exact />
           <Route path='/auth/password/forgot' component={ForgotPasswordPage} exact />
           <Route path='/auth/password/reset/:token' component={ResetPasswordPage} exact />
