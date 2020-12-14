@@ -9,6 +9,8 @@ import CartPage from './pages/CartPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ActivatePage from './pages/ActivatePage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
           <Route path='/login' component={LoginPage} />
           <Route path='/register' component={RegisterPage} />
           <Route path='/auth/activate/:token' component={ActivatePage} exact />
+          <Route path='/auth/password/forgot' component={ForgotPasswordPage} exact />
+          <Route path='/auth/password/reset/:token' component={ResetPasswordPage} exact />
           <Route path='/product/:id' component={ProductPage} />
           <Route path='/cart/:id?' component={CartPage} />
           <Route path='/' component={HomePage} exact />

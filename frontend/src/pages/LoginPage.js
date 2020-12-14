@@ -70,10 +70,15 @@ const LoginPage = ({ history, location }) => {
             </Form>
 
             <Row className='py-3'>
-                <Col>
+                <Col md={6}>
                     Nouvel Utilisateur? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
                         Créez un compte
                     </Link>
+                </Col>
+                <Col>
+                    <Link to="/auth/password/forgot" className="btn btn-sm btn-outline-dark">
+                        Mot de passe oubié
+                </Link>
                 </Col>
             </Row>
         </FormContainer>
