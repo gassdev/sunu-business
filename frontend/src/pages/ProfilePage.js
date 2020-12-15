@@ -12,6 +12,7 @@ const ProfilePage = ({ history, location }) => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState(null)
+    const [successMessage, setSuccessMessage] = useState(null)
 
 
 
@@ -51,8 +52,11 @@ const ProfilePage = ({ history, location }) => {
         e.preventDefault()
         if (password !== confirmPassword) {
             setMessage('Les Mots de passse ne correspondent pas')
+            setSuccessMessage(null)
         } else {
             dispatch(UpdateUserProfile({ id: user._id, firstName, lastName, email, password }))
+            setSuccessMessage('Profil modifié avec succés')
+            setMessage(null)
         }
     }
 
@@ -63,7 +67,7 @@ const ProfilePage = ({ history, location }) => {
             <h2>Profil d'utilisateur</h2>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
-            {success && <Message variant='success'>Profil modifié avec succés</Message>}
+            {successMessage && <Message variant='success'>{successMessage}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='firstName'>
