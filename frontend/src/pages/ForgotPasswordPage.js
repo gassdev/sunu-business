@@ -33,14 +33,14 @@ const ForgotPasswordPage = ({ location, history }) => {
             data: { email }
         })
             .then(response => {
-                console.log('FORGOT PASSWORD SUCCESS', response)
+                // console.log('FORGOT PASSWORD SUCCESS', response)
                 setSuccess(response.data.message)
                 setEmail('')
                 setError(null)
                 setLoading(false)
             })
             .catch(error => {
-                console.log('FORGOT PASSWORD ERROR', error.response.data)
+                // console.log('FORGOT PASSWORD ERROR', error.response.data)
                 setError(error.response.data.message ? error.response.data.message.email : error.response.data.error)
                 setSuccess(null)
                 setLoading(false)

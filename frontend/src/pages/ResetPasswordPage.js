@@ -36,14 +36,14 @@ const ResetPasswordPage = ({ location, history, match }) => {
             data: { newPassword, resetPasswordLink: token }
         })
             .then(response => {
-                console.log('FORGOT PASSWORD SUCCESS', response)
+                // console.log('RESET PASSWORD SUCCESS', response)
                 setSuccess(response.data.message)
                 setNewPassword('')
                 setError(null)
                 setLoading(false)
             })
             .catch(error => {
-                console.log('FORGOT PASSWORD ERROR', error.response.data)
+                // console.log('RESET PASSWORD ERROR', error.response.data)
                 setError(error.response.data.message ? error.response.data.message.newPassword : error.response.data.error)
                 setSuccess(null)
                 setLoading(false)
@@ -54,7 +54,7 @@ const ResetPasswordPage = ({ location, history, match }) => {
         <FormContainer>
             <h4>Réinitialiser Votre Mot de Passe</h4>
             {error && <Message variant='danger'>{error}</Message>}
-            {success && <Message variant='success'>{success} <Link to="/login">Connectez-vous</Link></Message>}
+            {success && <Message variant='success'>{success} <Link style={{ textDecoration: 'none' }} to="/login">Connectez-vous</Link></Message>}
             {loading && <Loader />}
             <Form onSubmit={clickSubmit}>
                 <Form.Group controlId='newPassword'>

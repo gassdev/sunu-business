@@ -77,7 +77,7 @@ const LoginPage = ({ history, location }) => {
                 </Col>
                 <Col>
                     <Link to="/auth/password/forgot" className="btn btn-sm btn-outline-dark">
-                        Mot de passe oubié
+                        Mot de passe oublié?
                 </Link>
                 </Col>
             </Row>

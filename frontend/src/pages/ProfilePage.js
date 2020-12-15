@@ -81,7 +81,7 @@ const ProfilePage = ({ history, location }) => {
                     <Form.Label>Adresse e-mail</Form.Label>
                     <Form.Control
                         type='email'
-                        value={email}
+                        defaultValue={email}
                         disabled
                     >
                     </Form.Control>

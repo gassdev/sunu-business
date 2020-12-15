@@ -171,6 +171,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         user.firstName = req.body.firstName || user.firstName
         user.lastName = req.body.lastName || user.lastName
         if (req.body.password) {
+            if (req.body.password.length < 6) {
+                res.status(400)
+                throw new Error('Votre mot de passe doit avoir au moins 6 caractères')
+            }
             user.password = req.body.password
         }
 
