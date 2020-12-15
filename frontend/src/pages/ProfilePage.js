@@ -3,7 +3,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, UpdateUserProfile } from '../actions/userActions'
 
 const ProfilePage = ({ history, location }) => {
     const [firstName, setFirstName] = useState('')
@@ -24,6 +24,9 @@ const ProfilePage = ({ history, location }) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const userUpdateProfile = useSelector(state => state.userUpdateProfile)
+    const { success } = userUpdateProfile
+
     useEffect(() => {
         if (!userInfo) {
             history.push('/login')
@@ -36,23 +39,31 @@ const ProfilePage = ({ history, location }) => {
                 setEmail(user.email)
             }
         }
-    }, [dispatch, history, userInfo, user.firstName, user.lastName, user.email])
+        if (success) {
+            setFirstName(userInfo.firstName)
+            setLastName(userInfo.lastName)
+            setPassword('')
+            setConfirmPassword('')
+        }
+    }, [dispatch, history, userInfo, user, success])
 
     const submitHandler = (e) => {
         e.preventDefault()
         if (password !== confirmPassword) {
             setMessage('Les Mots de passse ne correspondent pas')
         } else {
-            // DISPATCH UPDATE PROFILE
+            dispatch(UpdateUserProfile({ id: user._id, firstName, lastName, email, password }))
         }
     }
 
 
     return <Row>
+        <Col md={9}><h2>Historique d'Achats</h2></Col>
         <Col md={3}>
             <h2>Profil d'utilisateur</h2>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
+            {success && <Message variant='success'>Profil modifié avec succés</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='firstName'>
@@ -114,7 +125,6 @@ const ProfilePage = ({ history, location }) => {
             </Button>
             </Form>
         </Col>
-        <Col md={9}><h2>Historique d'Achats</h2></Col>
     </Row>
 }
 
