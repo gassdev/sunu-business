@@ -12,6 +12,7 @@ import ActivatePage from './pages/ActivatePage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ProfilePage from './pages/ProfilePage';
+import ShippingPage from './pages/ShippingPage';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/auth/password/reset/:token' component={ResetPasswordPage} exact />
           <Route path='/product/:id' component={ProductPage} />
           <Route path='/cart/:id?' component={CartPage} />
+          <Route path='/shipping' component={ShippingPage} />
           <Route path='/' component={HomePage} exact />
         </Container>
       </main>

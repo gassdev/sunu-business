@@ -59,6 +59,7 @@ const RegisterPage = ({ history, location }) => {
                         placeholder='Entrer Votre Prénom'
                         value={firstName}
                         onChange={handleChange('firstName')}
+                        required
                     ></Form.Control>
                 </Form.Group>
 
@@ -70,6 +71,7 @@ const RegisterPage = ({ history, location }) => {
                         placeholder='Entrer Votre Nom'
                         value={lastName}
                         onChange={handleChange('lastName')}
+                        required
                     ></Form.Control>
                 </Form.Group>
 
@@ -81,6 +83,7 @@ const RegisterPage = ({ history, location }) => {
                         placeholder='Entrer votre email'
                         value={email}
                         onChange={handleChange('email')}
+                        required
                     ></Form.Control>
                 </Form.Group>
 
@@ -92,6 +95,7 @@ const RegisterPage = ({ history, location }) => {
                         placeholder='Entrer Votre Mot de passe'
                         value={password}
                         onChange={handleChange('password')}
+                        required
                     ></Form.Control>
                 </Form.Group>
 
@@ -102,6 +106,7 @@ const RegisterPage = ({ history, location }) => {
                         placeholder='Confirmez Votre Mot de passe'
                         value={confirmPassword}
                         onChange={handleChange('confirmPassword')}
+                        required
                     ></Form.Control>
                 </Form.Group>
 
