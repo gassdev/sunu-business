@@ -51,6 +51,7 @@ const LoginPage = ({ history, location }) => {
                         placeholder='Entrer votre email'
                         value={email}
                         onChange={handleChange('email')}
+                        required
                     ></Form.Control>
                 </Form.Group>
 
@@ -61,6 +62,7 @@ const LoginPage = ({ history, location }) => {
                         placeholder='Entrer Votre Mot de passe'
                         value={password}
                         onChange={handleChange('password')}
+                        required
                     ></Form.Control>
                 </Form.Group>
 
