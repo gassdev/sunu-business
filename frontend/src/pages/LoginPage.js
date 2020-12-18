@@ -73,7 +73,7 @@ const LoginPage = ({ history, location }) => {
 
             <Row className='py-3'>
                 <Col md={6}>
-                    Nouvel Utilisateur? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+                    Nouvel Utilisateur? <Link style={{ textDecoration: 'none' }} to={redirect ? `/register?redirect=${redirect}` : '/register'}>
                         Créez un compte
                     </Link>
                 </Col>

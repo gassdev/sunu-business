@@ -37,7 +37,7 @@ const getProductById = asyncHandler(async (req, res) => {
 const list = asyncHandler(async (req, res) => {
     let order = req.query.order ? req.query.order : 'desc'
     let sortBy = req.query.sortBy ? req.query.sortBy : '_id'
-    let limit = req.query.limit ? req.query.limit : 10
+    let limit = req.query.limit ? Number(req.query.limit) : 10
 
     const products = await Product.find()
         .populate('category')

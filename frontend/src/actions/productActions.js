@@ -5,7 +5,13 @@ import {
     PRODUCT_LIST_FAIL,
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
-    PRODUCT_DETAILS_FAIL
+    PRODUCT_DETAILS_FAIL,
+    PRODUCT_LIST_BY_SELL_REQUEST,
+    PRODUCT_LIST_BY_SELL_SUCCESS,
+    PRODUCT_LIST_BY_SELL_FAIL,
+    PRODUCT_LIST_BY_ARRIVAL_REQUEST,
+    PRODUCT_LIST_BY_ARRIVAL_SUCCESS,
+    PRODUCT_LIST_BY_ARRIVAL_FAIL
 } from '../constants/productConstants'
 
 export const listProducts = () => async (dispatch) => {
@@ -25,6 +31,63 @@ export const listProducts = () => async (dispatch) => {
         })
     }
 }
+
+
+export const listProductsBySell = () => async (dispatch) => {
+    try {
+        dispatch({ type: PRODUCT_LIST_BY_SELL_REQUEST })
+
+        const { data } = await axios.get(
+            '/api/products',
+            {
+                params: {
+                    sortBy: 'sold',
+                    order: 'desc',
+                    limit: 10
+                }
+            }
+        )
+
+        dispatch({
+            type: PRODUCT_LIST_BY_SELL_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_LIST_BY_SELL_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+
+export const listProductsByArrival = () => async (dispatch) => {
+    try {
+        dispatch({ type: PRODUCT_LIST_BY_ARRIVAL_REQUEST })
+
+        const { data } = await axios.get(
+            '/api/products',
+            {
+                params: {
+                    sortBy: 'createdAt',
+                    order: 'desc',
+                    limit: 10
+                }
+            }
+        )
+
+        dispatch({
+            type: PRODUCT_LIST_BY_ARRIVAL_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_LIST_BY_ARRIVAL_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+
 
 export const listProductDetails = (id) => async (dispatch) => {
     try {
