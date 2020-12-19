@@ -40,6 +40,11 @@ const Header = () => {
                         <LinkContainer to="/">
                             <Navbar.Brand>Sunu-Business</Navbar.Brand>
                         </LinkContainer>
+                        <Nav>
+                            <LinkContainer style={{ fontSize: '1.09375rem' }} to="/shop">
+                                <Nav.Link active={isActive('/shop')}>Tous nos produits</Nav.Link>
+                            </LinkContainer>
+                        </Nav>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="ml-auto">

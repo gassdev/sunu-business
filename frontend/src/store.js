@@ -11,12 +11,14 @@ import {
     cartReducer
 } from './reducers/cartReducers'
 import { userActivateReducer, userDetailsReducer, userLoginReducer, userRegisterReducer, userUpdateProfileReducer } from './reducers/userReducers'
+import { categoryListReducer } from './reducers/categoryReducers'
 
 const reducer = combineReducers({
     productList: productListReducer,
     productListBySell: productListBySellReducer,
     productListByArrival: productListByArrivalReducer,
     productDetails: productDetailsReducer,
+    categoryList: categoryListReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
