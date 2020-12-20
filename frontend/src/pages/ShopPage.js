@@ -3,6 +3,9 @@ import { Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { listCategories } from '../actions/categoryActions'
 import Checkbox from '../components/Checkbox'
+import RadioBox from '../components/RadioBox'
+import { prices } from '../utils/FixedPrices'
+
 
 const ShopPage = () => {
 
@@ -23,7 +26,26 @@ const ShopPage = () => {
         // console.log('SHOP PAGE', filters, filterBy)
         const newFilters = { ...myFilters }
         newFilters.filters[filterBy] = filters
+
+        if (filterBy === "price") {
+            let priceValues = handlePrice(filters)
+            newFilters.filters[filterBy] = priceValues
+        }
+
         setMyFilters(newFilters)
+    }
+
+    const handlePrice = value => {
+        const data = prices
+        let array = []
+
+        for (const key in data) {
+            if (data[key]._id === Number(value)) {
+                array = data[key].array
+
+            }
+        }
+        return array
     }
 
     return (
@@ -37,6 +59,14 @@ const ShopPage = () => {
                             handleFilters={filters => handleFilters(filters, "category")}
                         />
                     </ul>
+
+                    <h4>Filter par prix</h4>
+                    <div>
+                        <RadioBox
+                            prices={prices}
+                            handleFilters={filters => handleFilters(filters, "price")}
+                        />
+                    </div>
                 </Col>
                 <Col lg={8}>{JSON.stringify(myFilters)}</Col>
             </Row>
