@@ -27,6 +27,6 @@ export const prices = [
     {
         _id: 5,
         name: "Plus de 599F CFA",
-        array: [600, 1000]
+        array: [599.1, 1000]
     },
 ]

@@ -106,3 +106,10 @@ export const listProductDetails = (id) => async (dispatch) => {
         })
     }
 }
+
+
+export const getFilteredProducts = (skip, limit, filters = {}) => {
+    return axios.post('/api/products/by/search', { skip, limit, filters })
+        .then(response => { return response })
+        .catch(error => { console.log(error) })
+}
